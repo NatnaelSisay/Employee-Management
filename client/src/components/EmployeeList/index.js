@@ -64,7 +64,12 @@ const EmployeeList = (props) => {
             <div>
                 {data.map(({ id, name, dateOfBirth }) => {
                     return (
-                        <Row name={name} dateOfBirth={dateOfBirth} id={id} />
+                        <Row
+                            key={id}
+                            name={name}
+                            dateOfBirth={dateOfBirth}
+                            id={id}
+                        />
                     );
                 })}
             </div>

@@ -3,9 +3,10 @@ import React from "react";
 import Button from "../UI/Button";
 
 import "./index.css";
-import Row from "./employeeRow";
+import Row from "./EmployeeRow";
+import EmployeeListView from "./EmployeeListView";
 
-const data = [
+const fetchedData = [
     {
         id: 1,
         name: "Java",
@@ -58,23 +59,32 @@ const data = [
     },
 ];
 
-const EmployeeList = (props) => {
-    return (
-        <div className="employeeListContainer">
-            <div>
-                {data.map(({ id, name, dateOfBirth }) => {
-                    return (
-                        <Row
-                            key={id}
-                            name={name}
-                            dateOfBirth={dateOfBirth}
-                            id={id}
-                        />
-                    );
-                })}
+class EmployeeList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: false,
+            data: [],
+            error: "",
+        };
+    }
+
+    componentDidMount() {
+        this.setState({ loading: true });
+        setTimeout(() => {
+            this.setState({ loading: false });
+            this.setState({ data: fetchedData });
+        }, 2000);
+    }
+
+    render() {
+        const { data, loading } = this.state;
+        return (
+            <div className="employeeListContainer">
+                {loading ? "Loading ..." : <EmployeeListView data={data} />}
             </div>
-        </div>
-    );
-};
+        );
+    }
+}
 
 export default EmployeeList;

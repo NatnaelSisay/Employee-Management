@@ -6,9 +6,6 @@ import EmployeeList from "../EmployeeList";
 import AddEmployee from "../AddEmployee";
 import EditEmployee from "../EditEmployee";
 
-function About() {
-    return <div>About page</div>;
-}
 function App() {
     return (
         <div className="App">

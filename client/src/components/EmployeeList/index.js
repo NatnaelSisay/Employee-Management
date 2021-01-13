@@ -4,87 +4,33 @@ import { connect } from "react-redux";
 import "./index.css";
 import EmployeeListView from "./EmployeeListView";
 
-const fetchedData = [
-    {
-        id: 1,
-        name: "Java",
-        dateOfBirth: "1919/23/2",
-        gender: "Male",
-        salary: "50,000",
-    },
-    {
-        id: 2,
-        name: "Alemlate",
-        dateOfBirth: "1919/23/2",
-        gender: "Male",
-        salary: "50,000",
-    },
-    {
-        id: 3,
-        name: "Jemal",
-        dateOfBirth: "1919/23/2",
-        gender: "Male",
-        salary: "50,000",
-    },
-    {
-        id: 4,
-        name: "Temesgen",
-        dateOfBirth: "1919/23/2",
-        gender: "Male",
-        salary: "50,000",
-    },
-    {
-        id: 5,
-        name: "Fifty",
-        dateOfBirth: "1919/23/2",
-        gender: "Male",
-        salary: "50,000",
-    },
-
-    {
-        id: 6,
-        name: "Tedi",
-        dateOfBirth: "1919/23/2",
-        gender: "Male",
-        salary: "50,000",
-    },
-    {
-        id: 7,
-        name: "Mere",
-        dateOfBirth: "1919/23/2",
-        gender: "Male",
-        salary: "50,000",
-    },
-];
-
 class EmployeeList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            loading: false,
-            data: [],
-            error: "",
-        };
     }
 
     componentDidMount() {
-        this.setState({ loading: true });
-        this.props.dispatch({ type: "FETCH_EMPLOYEE_REQUEST" });
-
         setTimeout(() => {
-            this.setState({ loading: false });
-            this.setState({ data: fetchedData });
+            this.props.dispatch({ type: "FETCH_EMPLOYEE_REQUEST" });
         }, 1000);
     }
 
     render() {
-        const { data, loading } = this.state;
+        const { employee, loading } = this.props;
+        console.log("Loading => ", loading);
+        // console.log("employee => ", employee);
+
         return (
             <div className="employeeListContainer">
-                {loading ? "Loading ..." : <EmployeeListView data={data} />}
+                {loading ? "Loading ..." : <EmployeeListView data={employee} />}
             </div>
         );
     }
 }
 
-export default connect()(EmployeeList);
+const mapStateToProps = (state) => {
+    const { loading, error, employee } = state.fetchEmployee;
+    return { loading, error, employee };
+};
+
+export default connect(mapStateToProps, null)(EmployeeList);

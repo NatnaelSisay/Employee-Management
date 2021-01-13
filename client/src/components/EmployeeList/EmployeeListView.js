@@ -4,16 +4,17 @@ const EmployeeListView = (props) => {
     const { data } = props;
     return (
         <div>
-            {data.map(({ id, name, dateOfBirth }) => {
-                return (
-                    <Row
-                        key={id}
-                        name={name}
-                        dateOfBirth={dateOfBirth}
-                        id={id}
-                    />
-                );
-            })}
+            {data &&
+                data.map(({ id, name, dateOfBirth }) => {
+                    return (
+                        <Row
+                            key={id}
+                            name={name}
+                            dateOfBirth={dateOfBirth}
+                            id={id}
+                        />
+                    );
+                })}
         </div>
     );
 };

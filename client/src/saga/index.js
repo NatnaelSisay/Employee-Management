@@ -1,9 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import {
-    fetchEmployeeReqest,
-    fetchEmployeeSuccess,
-    fetchEmployeeFailure,
-} from "../store/actions";
+import { fetchEmployeeReqest, fetchEmployeeSuccess } from "../store/actions";
 
 import { FETCH_EMPLOYEE_REQUEST } from "../store/types";
 
@@ -63,8 +59,11 @@ const fetchedData = [
 // Worker
 export function* fetchEmployee() {
     console.log("Saga called");
-    // yield put(fetchEmployeeReqest());
+
+    yield put(fetchEmployeeReqest());
     yield put(fetchEmployeeSuccess(fetchedData));
+
+    console.log("request over");
 }
 
 // Watcher

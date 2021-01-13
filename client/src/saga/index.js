@@ -1,8 +1,11 @@
-import React from "react";
-import { connect } from "react-redux";
+import { call, put, takeLatest } from "redux-saga/effects";
+import {
+    fetchEmployeeReqest,
+    fetchEmployeeSuccess,
+    fetchEmployeeFailure,
+} from "../store/actions";
 
-import "./index.css";
-import EmployeeListView from "./EmployeeListView";
+import { FETCH_EMPLOYEE_REQUEST } from "../store/types";
 
 const fetchedData = [
     {
@@ -57,34 +60,16 @@ const fetchedData = [
     },
 ];
 
-class EmployeeList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loading: false,
-            data: [],
-            error: "",
-        };
-    }
-
-    componentDidMount() {
-        this.setState({ loading: true });
-        this.props.dispatch({ type: "FETCH_EMPLOYEE_REQUEST" });
-
-        setTimeout(() => {
-            this.setState({ loading: false });
-            this.setState({ data: fetchedData });
-        }, 1000);
-    }
-
-    render() {
-        const { data, loading } = this.state;
-        return (
-            <div className="employeeListContainer">
-                {loading ? "Loading ..." : <EmployeeListView data={data} />}
-            </div>
-        );
-    }
+// Worker
+export function* fetchEmployee() {
+    console.log("Saga called");
+    // yield put(fetchEmployeeReqest());
+    yield put(fetchEmployeeSuccess(fetchedData));
 }
 
-export default connect()(EmployeeList);
+// Watcher
+export function* watchFetchEmployee() {
+    yield takeLatest(FETCH_EMPLOYEE_REQUEST, fetchEmployee);
+}
+
+export default watchFetchEmployee;

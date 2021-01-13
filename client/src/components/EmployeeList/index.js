@@ -74,7 +74,7 @@ class EmployeeList extends React.Component {
         setTimeout(() => {
             this.setState({ loading: false });
             this.setState({ data: fetchedData });
-        }, 2000);
+        }, 1000);
     }
 
     render() {

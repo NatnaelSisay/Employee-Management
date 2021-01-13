@@ -4,4 +4,18 @@ import {
     fetchEmployeeFailure,
 } from "./fetchEmployee/action";
 
-export { fetchEmployeeReqest, fetchEmployeeSuccess, fetchEmployeeFailure };
+import {
+    addEmployeeRequest,
+    addEmployeeSuccess,
+    addEmployeeFailure,
+} from "./addEmployee/action";
+
+export {
+    fetchEmployeeReqest,
+    fetchEmployeeSuccess,
+    fetchEmployeeFailure,
+    //
+    addEmployeeRequest,
+    addEmployeeSuccess,
+    addEmployeeFailure,
+};

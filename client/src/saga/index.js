@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { fetchEmployeeReqest, fetchEmployeeSuccess } from "../store/actions";
 
-import { FETCH_EMPLOYEE_REQUEST } from "../store/types";
+import { FETCH_EMPLOYEE_REQUEST_SAGA } from "../store/types";
 
 const fetchedData = [
     {
@@ -68,7 +68,7 @@ export function* fetchEmployee() {
 
 // Watcher
 export function* watchFetchEmployee() {
-    yield takeLatest(FETCH_EMPLOYEE_REQUEST, fetchEmployee);
+    yield takeLatest(FETCH_EMPLOYEE_REQUEST_SAGA, fetchEmployee);
 }
 
 export default watchFetchEmployee;

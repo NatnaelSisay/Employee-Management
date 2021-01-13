@@ -1,18 +1,18 @@
 import {
-    FETCH_EMPLOYEE_REQUEST_NO_SAGA,
+    FETCH_EMPLOYEE_REQUEST,
     FETCH_EMPLOYEE_SUCCESS,
     FETCH_EMPLOYEE_FAILURE,
 } from "../types";
 
 const initialState = {
-    loading: false,
+    loading: true,
     employee: [],
     error: "",
 };
 
 const fetchEmployee = (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_EMPLOYEE_REQUEST_NO_SAGA:
+        case FETCH_EMPLOYEE_REQUEST:
             return { ...state, loading: true };
 
         case FETCH_EMPLOYEE_SUCCESS:

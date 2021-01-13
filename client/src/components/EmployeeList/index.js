@@ -11,7 +11,7 @@ class EmployeeList extends React.Component {
 
     componentDidMount() {
         setTimeout(() => {
-            this.props.dispatch({ type: "FETCH_EMPLOYEE_REQUEST" });
+            this.props.dispatch({ type: "FETCH_EMPLOYEE_REQUEST_SAGA" });
         }, 1000);
     }
 

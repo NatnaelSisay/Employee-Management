@@ -34,9 +34,7 @@ function App() {
                     <AddEmployee />
                 </Route>
 
-                <Route path="/edit">
-                    <EditEmployee />
-                </Route>
+                <Route path="/edit/:id" component={EditEmployee} />
             </Switch>
         </div>
     );

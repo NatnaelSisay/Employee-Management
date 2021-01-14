@@ -17,11 +17,11 @@ class Row extends React.Component {
     }
 
     render() {
-        const { id, name, dateOfBirth } = this.props;
-
+        const { id, employeeName, dateOfBirth } = this.props;
+        const to = `/edit/${id}`;
         return (
             <div className="rowContainer" key={id}>
-                <p className="employeeName">{name}</p>
+                <p className="employeeName">{employeeName}</p>
                 <p>{dateOfBirth}</p>
                 <div className="buttonContainer">
                     <button
@@ -31,7 +31,7 @@ class Row extends React.Component {
                         Delete
                     </button>
                     <button className="editButton">
-                        <Link to="/edit">Edit</Link>
+                        <Link to={to}>Edit</Link>
                     </button>
                 </div>
             </div>

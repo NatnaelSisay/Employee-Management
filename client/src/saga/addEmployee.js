@@ -1,6 +1,21 @@
-import { takeLatest } from "redux-saga/effects";
-export function* addEmployee(payload) {
-    yield console.log("Called");
+import { put, takeLatest } from "redux-saga/effects";
+import { addEmployeeRequest, addEmployeeSuccess } from "../store/actions";
+
+import { fetchedData } from "./fetchEmployee";
+export function* addEmployee(result) {
+    const { payload } = result;
+    yield put(addEmployeeRequest());
+    // Call the Api to server.
+    let data = {
+        id: Math.random() * 100,
+        name: payload.employeeName,
+        dateOfBirth: payload.dateOfBirth,
+        gender: payload.gender,
+        salary: payload.salary,
+    };
+    yield fetchedData.push(data);
+    // yield console.log("Feth Data Updated => ", fetchedData);
+    yield put(addEmployeeSuccess());
 }
 
 export default function* watchAddEmployee() {

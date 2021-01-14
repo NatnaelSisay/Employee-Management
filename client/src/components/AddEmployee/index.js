@@ -8,10 +8,10 @@ class AddEmployee extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            employeeName: "",
-            dateOfBirth: "",
-            gender: "",
-            salary: "",
+            employeeName: "test",
+            dateOfBirth: "test",
+            gender: "Male",
+            salary: "1Million",
         };
 
         this.submit = this.submit.bind(this);
@@ -20,7 +20,10 @@ class AddEmployee extends React.Component {
     submit(e) {
         e.preventDefault();
         console.log(this.state);
-        this.props.dispatch({ type: "ADD_EMPLOYEE_REQUEST_SAGA" });
+        this.props.dispatch({
+            type: "ADD_EMPLOYEE_REQUEST_SAGA",
+            payload: this.state,
+        });
     }
 
     handleChange(e) {
@@ -29,8 +32,14 @@ class AddEmployee extends React.Component {
     }
     render() {
         const { employeeName, gender, dateOfBirth, salary } = this.state;
+        const { loading, error, success } = this.props;
+        console.log("Loading add => ", loading);
         return (
             <div>
+                {/* {success && <p> Successfully Added to the List</p>} */}
+                {error && <p> Error : {error} </p>}
+                {loading && <p>Loading ...</p>}
+
                 <Form
                     employeeName={employeeName}
                     gender={gender}
@@ -45,4 +54,9 @@ class AddEmployee extends React.Component {
     }
 }
 
-export default connect()(AddEmployee);
+const mapStateToProps = (state) => {
+    const { loading, success, error } = state.addEmployee;
+    return { loading, success, error };
+};
+
+export default connect(mapStateToProps, null)(AddEmployee);

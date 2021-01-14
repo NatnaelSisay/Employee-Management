@@ -3,7 +3,7 @@ import { fetchEmployeeReqest, fetchEmployeeSuccess } from "../store/actions";
 
 import { FETCH_EMPLOYEE_REQUEST_SAGA } from "../store/types";
 
-const fetchedData = [
+export let fetchedData = [
     {
         id: 1,
         name: "Java",

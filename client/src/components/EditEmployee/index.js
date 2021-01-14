@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import "./index.css";
 import Form from "../UI/EmployeeForm";
 
@@ -19,6 +21,7 @@ class EditEmployee extends React.Component {
     submit(e) {
         e.preventDefault();
         console.log(this.state);
+        this.props.dispatch({ type: "UPDATE_EMPLOYEE_REQUEST_SAGA" });
     }
 
     handleChange(e) {
@@ -43,4 +46,4 @@ class EditEmployee extends React.Component {
     }
 }
 
-export default EditEmployee;
+export default connect()(EditEmployee);

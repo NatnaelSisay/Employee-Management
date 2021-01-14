@@ -10,6 +10,18 @@ import {
     addEmployeeFailure,
 } from "./addEmployee/action";
 
+import {
+    updateEmployeeRequest,
+    updateEmployeeSuccess,
+    updateEmployeeFailure,
+} from "./updateEmployee/action";
+
+import {
+    deleteEmployeeRequest,
+    deleteEmployeeSuccess,
+    deleteEmployeeFailure,
+} from "./deleteEmployee/action";
+
 export {
     fetchEmployeeReqest,
     fetchEmployeeSuccess,
@@ -18,4 +30,12 @@ export {
     addEmployeeRequest,
     addEmployeeSuccess,
     addEmployeeFailure,
+    //
+    updateEmployeeRequest,
+    updateEmployeeSuccess,
+    updateEmployeeFailure,
+    //
+    deleteEmployeeRequest,
+    deleteEmployeeSuccess,
+    deleteEmployeeFailure,
 };

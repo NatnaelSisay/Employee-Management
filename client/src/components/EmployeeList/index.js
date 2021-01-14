@@ -5,10 +5,6 @@ import "./index.css";
 import EmployeeListView from "./EmployeeListView";
 
 class EmployeeList extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         setTimeout(() => {
             this.props.dispatch({ type: "FETCH_EMPLOYEE_REQUEST_SAGA" });

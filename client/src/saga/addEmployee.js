@@ -1,6 +1,6 @@
-import { put, takeLatest } from "redux-saga/effects";
+import { takeLatest } from "redux-saga/effects";
 export function* addEmployee(payload) {
-    console.log("Called");
+    yield console.log("Called");
 }
 
 export default function* watchAddEmployee() {

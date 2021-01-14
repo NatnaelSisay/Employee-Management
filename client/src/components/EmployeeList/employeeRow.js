@@ -9,12 +9,16 @@ class Row extends React.Component {
         this.handleDelete = this.handleDelete.bind(this);
     }
 
-    handleDelete() {
-        this.props.dispatch({ type: "DELETE_EMPLOYEE_REQUEST_SAGA" });
+    handleDelete(id) {
+        this.props.dispatch({
+            type: "DELETE_EMPLOYEE_REQUEST_SAGA",
+            payload: id,
+        });
     }
 
     render() {
         const { id, name, dateOfBirth } = this.props;
+
         return (
             <div className="rowContainer" key={id}>
                 <p className="employeeName">{name}</p>
@@ -22,7 +26,7 @@ class Row extends React.Component {
                 <div className="buttonContainer">
                     <button
                         className="deleteButton"
-                        onClick={this.handleDelete}
+                        onClick={() => this.handleDelete(id)}
                     >
                         Delete
                     </button>

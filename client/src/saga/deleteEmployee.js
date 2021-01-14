@@ -1,9 +1,29 @@
-import { takeLatest } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
+import {
+    deleteEmployeeRequest,
+    deleteEmployeeSuccess,
+    deleteEmployeeFailure,
+} from "../store/actions";
 
-function* deleteEmployee(props) {
-    yield console.log("Delete Saga Called");
+import { fetchedData } from "./fetchEmployee";
+
+function* deleteEmployee(payload) {
+    const id = payload.payload;
+
+    yield put(deleteEmployeeRequest());
+    // Call Api and do the work
+
+    yield put(deleteEmployeeSuccess());
+    yield put({ type: "FETCH_EMPLOYEE_REQUEST_SAGA" });
+
+    console.log("deleting => ", id);
+    for (let i = 0; i < fetchedData.length; i++) {
+        if (fetchedData[i].id == id) {
+            fetchedData[i].name = fetchedData[i].name + " [Deleted]";
+        }
+    }
 }
 
 export default function* watchDeleteEmployee() {
-    yield takeLatest("DELETE_EMPLOYEE_REQUEST_SAGA", deleteEmployee);
+    yield takeEvery("DELETE_EMPLOYEE_REQUEST_SAGA", deleteEmployee);
 }

@@ -1,9 +1,5 @@
 import { put, takeEvery } from "redux-saga/effects";
-import {
-    deleteEmployeeRequest,
-    deleteEmployeeSuccess,
-    deleteEmployeeFailure,
-} from "../store/actions";
+import { deleteEmployeeRequest, deleteEmployeeSuccess } from "../store/actions";
 
 import { fetchedData } from "./fetchEmployee";
 
@@ -18,7 +14,7 @@ function* deleteEmployee(payload) {
 
     console.log("deleting => ", id);
     for (let i = 0; i < fetchedData.length; i++) {
-        if (fetchedData[i].id == id) {
+        if (fetchedData[i].id === id) {
             fetchedData[i].name = fetchedData[i].name + " [Deleted]";
         }
     }

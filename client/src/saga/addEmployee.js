@@ -8,10 +8,7 @@ export function* addEmployee(result) {
     // Call the Api to server.
     let data = {
         id: Math.random() * 100,
-        name: payload.employeeName,
-        dateOfBirth: payload.dateOfBirth,
-        gender: payload.gender,
-        salary: payload.salary,
+        ...payload,
     };
     yield fetchedData.push(data);
     // yield console.log("Feth Data Updated => ", fetchedData);

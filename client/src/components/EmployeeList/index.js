@@ -13,8 +13,6 @@ class EmployeeList extends React.Component {
 
     render() {
         const { employee, loading } = this.props;
-        console.log("Loading => ", loading);
-        // console.log("employee => ", employee);
 
         return (
             <div className="employeeListContainer">

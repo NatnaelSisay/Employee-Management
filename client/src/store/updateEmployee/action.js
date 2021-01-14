@@ -5,7 +5,10 @@ import {
 } from "../types";
 
 const updateEmployeeRequest = () => ({ type: UPDATE_EMPLOYEE_REQUEST });
-const updateEmployeeSuccess = () => ({ type: UPDATE_EMPLOYEE_SUCCESS });
+const updateEmployeeSuccess = (result) => ({
+    type: UPDATE_EMPLOYEE_SUCCESS,
+    payload: result,
+});
 const updateEmployeeFailure = (message) => ({
     type: UPDATE_EMPLOYEE_FAILURE,
     payload: message,

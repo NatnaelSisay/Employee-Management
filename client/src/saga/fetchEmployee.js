@@ -6,35 +6,35 @@ import { FETCH_EMPLOYEE_REQUEST_SAGA } from "../store/types";
 export let fetchedData = [
     {
         id: 1,
-        name: "Java",
+        employeeName: "Java",
         dateOfBirth: "1919/23/2",
         gender: "Male",
         salary: "50,000",
     },
     {
         id: 2,
-        name: "Alemlate",
+        employeeName: "Alemlate",
         dateOfBirth: "1919/23/2",
         gender: "Male",
         salary: "50,000",
     },
     {
         id: 3,
-        name: "Jemal",
+        employeeName: "Jemal",
         dateOfBirth: "1919/23/2",
         gender: "Male",
         salary: "50,000",
     },
     {
         id: 4,
-        name: "Temesgen",
+        employeeName: "Temesgen",
         dateOfBirth: "1919/23/2",
         gender: "Male",
         salary: "50,000",
     },
     {
         id: 5,
-        name: "Fifty",
+        employeeName: "Fifty",
         dateOfBirth: "1919/23/2",
         gender: "Male",
         salary: "50,000",
@@ -42,14 +42,14 @@ export let fetchedData = [
 
     {
         id: 6,
-        name: "Tedi",
+        employeeName: "Tedi",
         dateOfBirth: "1919/23/2",
         gender: "Male",
         salary: "50,000",
     },
     {
         id: 7,
-        name: "Mere",
+        employeeName: "Mere",
         dateOfBirth: "1919/23/2",
         gender: "Male",
         salary: "50,000",
@@ -58,12 +58,8 @@ export let fetchedData = [
 
 // Worker
 export function* fetchEmployee() {
-    console.log("Saga called");
-
     yield put(fetchEmployeeReqest());
     yield put(fetchEmployeeSuccess(fetchedData));
-
-    console.log("request over");
 }
 
 // Watcher

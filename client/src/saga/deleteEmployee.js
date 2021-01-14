@@ -15,7 +15,8 @@ function* deleteEmployee(payload) {
     console.log("deleting => ", id);
     for (let i = 0; i < fetchedData.length; i++) {
         if (fetchedData[i].id === id) {
-            fetchedData[i].name = fetchedData[i].name + " [Deleted]";
+            fetchedData[i].employeeName =
+                fetchedData[i].employeeName + " [Deleted]";
         }
     }
 }

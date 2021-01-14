@@ -6,7 +6,7 @@ import {
 
 const initialState = {
     loading: true,
-    success: false,
+    employee: {},
     error: "",
 };
 
@@ -16,7 +16,12 @@ const updateEmployee = (state = initialState, action) => {
             return { ...state, loading: true };
 
         case UPDATE_EMPLOYEE_SUCCESS:
-            return { ...state, loading: false, success: true };
+            return {
+                ...state,
+                loading: false,
+
+                employee: action.payload,
+            };
 
         case UPDATE_EMPLOYEE_FAILURE:
             return { ...state, loading: false, error: action.payload };

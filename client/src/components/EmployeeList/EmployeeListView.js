@@ -5,11 +5,11 @@ const EmployeeListView = (props) => {
     return (
         <div>
             {data &&
-                data.map(({ id, name, dateOfBirth }) => {
+                data.map(({ id, employeeName, dateOfBirth }) => {
                     return (
                         <Row
                             key={id}
-                            name={name}
+                            employeeName={employeeName}
                             dateOfBirth={dateOfBirth}
                             id={id}
                         />

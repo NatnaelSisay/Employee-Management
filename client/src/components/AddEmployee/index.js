@@ -32,7 +32,7 @@ class AddEmployee extends React.Component {
     }
     render() {
         const { employeeName, gender, dateOfBirth, salary } = this.state;
-        const { loading, error, success } = this.props;
+        const { loading, error } = this.props;
         console.log("Loading add => ", loading);
         return (
             <div>

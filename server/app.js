@@ -1,5 +1,8 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: true }));
 const port = 3000;
 let fetchedData = [
     {
@@ -56,27 +59,61 @@ let fetchedData = [
 // the app is small scale so we dont need a router folder
 app.get("/", (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
-    res.send(fetchedData);
+    res.send({ success: true, data: fetchedData });
+});
+
+app.get("/:id", (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    const { id } = req.params;
+    const result = fetchedData.filter(
+        (employee) => employee.id === parseInt(id)
+    )[0];
+    if (result) {
+        res.send({ success: true, data: result });
+    }
+    res.send({ success: false, error: "No Employee With that id" });
 });
 
 app.post("/", (req, res) => {
-    res.send(fetchedData);
+    const employee = req.body;
+    employee.id = Math.random() * 1000;
+    fetchedData.push(employee);
+    // res.send({ success: true });
+    res.send({ success: true, data: employee });
 });
 
 app.delete("/:id", (req, res) => {
+    const { id } = req.params;
+    fetchedData = fetchedData.filter(
+        (employee) => employee.id !== parseInt(id)
+    );
     res.send({
-        message: "Deletion was successfull",
+        success: true,
+        data: id,
     });
 });
 
 app.patch("/:id", (req, res) => {
+    const { id } = req.params;
+    const employee = req.body;
+    for (let i = 0; i < fetchedData.length; i++) {
+        if (fetchedData[i].id === parseInt(id)) {
+            fetchedData[i] = employee;
+            fetchedData[i].id = parseInt(id);
+            res.send({
+                success: true,
+                data: id,
+            });
+        }
+    }
     res.send({
-        message: "Update was successfull",
+        success: false,
+        error: "No Employee with the id",
     });
 });
 
 app.get("*", (req, res) => {
-    res.send("404 page not found");
+    res.send({ success: false, error: "page not found" });
 });
 app.listen(port, () => {
     console.log(`Java app listening at http://localhost:${port}`);

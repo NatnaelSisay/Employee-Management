@@ -6,6 +6,9 @@ const fetchEmplyeeApi = () => {
     return axios.get(BASE_URL);
 };
 
+const fetchOneEmployeeApi = (id) => {
+    return axios.get(BASE_URL);
+};
 const updateEmployee = (userId, data) => {
     return axios.put(BASE_URL, { userId, data });
 };
@@ -18,4 +21,10 @@ const createEmployee = (data) => {
     return axios.post(BASE_URL, data);
 };
 
-export { fetchEmplyeeApi, updateEmployee, deleteEmployee, createEmployee };
+export {
+    fetchEmplyeeApi,
+    fetchOneEmployeeApi,
+    updateEmployee,
+    deleteEmployee,
+    createEmployee,
+};

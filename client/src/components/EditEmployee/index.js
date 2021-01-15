@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { fetchOneEmployeeApi } from "../../api";
 
 import "./index.css";
 import Form from "../UI/EmployeeForm";
@@ -22,10 +23,12 @@ class EditEmployee extends React.Component {
     }
     componentDidMount() {
         const { params } = this.props.match;
-        this.props.dispatch({ type: "UPDATE_EMPLOYEE_REQUEST_SAGA", params });
-        this.setState((prev) => {
-            return this.props.employee;
-        });
+        const { id } = params;
+        fetchOneEmployeeApi(id)
+            .then(({ data }) => this.setState(data[id - 1]))
+            .catch((error) =>
+                console.log("Edit Employee Fetch [ ERROR ]", error)
+            );
     }
 
     submit(e) {

@@ -1,5 +1,5 @@
 import React from "react";
-import Row from "./EmployeeRow";
+import Row from "./employeeRow";
 const EmployeeListView = (props) => {
     const { data } = props;
     return (

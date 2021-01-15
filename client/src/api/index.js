@@ -1,8 +1,8 @@
 import axios from "axios";
-const BASE_URL = "localhost";
+const BASE_URL = "http://localhost:3000";
 
 // make fetch request
-const fetchEmplyee = () => {
+const fetchEmplyeeApi = () => {
     return axios.get(BASE_URL);
 };
 
@@ -18,4 +18,4 @@ const createEmployee = (data) => {
     return axios.post(BASE_URL, data);
 };
 
-export { fetchEmplyee, updateEmployee, deleteEmployee, createEmployee };
+export { fetchEmplyeeApi, updateEmployee, deleteEmployee, createEmployee };

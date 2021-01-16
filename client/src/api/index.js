@@ -7,10 +7,10 @@ const fetchEmplyeeApi = () => {
 };
 
 const fetchOneEmployeeApi = (id) => {
-    return axios.get(BASE_URL);
+    return axios.get(`${BASE_URL}/${id}`);
 };
-const updateEmployee = (userId, data) => {
-    return axios.put(BASE_URL, { userId, data });
+const updateEmployeeApi = (employee) => {
+    return axios.patch(`${BASE_URL}/${employee.id}`, employee);
 };
 
 const deleteEmployee = () => {
@@ -24,7 +24,7 @@ const createEmployee = (employee) => {
 export {
     fetchEmplyeeApi,
     fetchOneEmployeeApi,
-    updateEmployee,
+    updateEmployeeApi,
     deleteEmployee,
     createEmployee,
 };

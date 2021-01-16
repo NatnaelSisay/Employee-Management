@@ -61,12 +61,10 @@ let fetchedData = [
 ];
 // the app is small scale so we dont need a router folder
 app.get("/", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     res.send({ success: true, data: fetchedData });
 });
 
 app.get("/:id", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     const { id } = req.params;
     const result = fetchedData.filter(
         (employee) => employee.id === parseInt(id)
@@ -80,7 +78,7 @@ app.get("/:id", (req, res) => {
 app.post("/", (req, res) => {
     console.log(req);
     const employee = req.body;
-    employee.id = Math.random() * 100;
+    employee.id = Math.round(Math.random() * 1000);
 
     console.log("Data with Id => ", employee);
     // const theEmployee = JSON.parse(Object.keys(employee)[0]);

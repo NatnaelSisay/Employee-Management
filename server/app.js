@@ -61,6 +61,7 @@ let fetchedData = [
 ];
 // the app is small scale so we dont need a router folder
 app.get("/", (req, res) => {
+    console.log("Fetch Data called ");
     res.send({ success: true, data: fetchedData });
 });
 
@@ -76,11 +77,11 @@ app.get("/:id", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-    console.log(req);
+    // console.log(req);
     const employee = req.body;
     employee.id = Math.round(Math.random() * 1000);
 
-    console.log("Data with Id => ", employee);
+    // console.log("Data with Id => ", employee);
     // const theEmployee = JSON.parse(Object.keys(employee)[0]);
     // // console.log("Request from Browser => ", theEmployee);
     fetchedData.push(employee);
@@ -102,12 +103,13 @@ app.patch("/:id", (req, res) => {
     // console.log(req);
     const employee = req.body;
     for (let i = 0; i < fetchedData.length; i++) {
-        if (fetchedData[i].id === employee.id) {
+        if (fetchedData[i].id === parseInt(employee.id)) {
             fetchedData[i] = employee;
             res.send({
                 success: true,
                 data: employee,
             });
+            return;
         }
     }
     res.send({

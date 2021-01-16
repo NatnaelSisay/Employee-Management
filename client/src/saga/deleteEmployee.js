@@ -1,24 +1,16 @@
-import { put, takeEvery } from "redux-saga/effects";
+import { call, put, takeEvery } from "redux-saga/effects";
 import { deleteEmployeeRequest, deleteEmployeeSuccess } from "../store/actions";
-
-import { fetchedData } from "./fetchEmployee";
+import { deleteEmployeeApi } from "../api";
 
 function* deleteEmployee(payload) {
     const id = payload.payload;
 
     yield put(deleteEmployeeRequest());
-    // Call Api and do the work
-
+    yield call(deleteEmployeeApi, id);
     yield put(deleteEmployeeSuccess());
-    yield put({ type: "FETCH_EMPLOYEE_REQUEST_SAGA" });
 
-    console.log("deleting => ", id);
-    for (let i = 0; i < fetchedData.length; i++) {
-        if (fetchedData[i].id === id) {
-            fetchedData[i].employeeName =
-                fetchedData[i].employeeName + " [Deleted]";
-        }
-    }
+    // Fetch The updated Data again
+    yield put({ type: "FETCH_EMPLOYEE_REQUEST_SAGA" });
 }
 
 export default function* watchDeleteEmployee() {

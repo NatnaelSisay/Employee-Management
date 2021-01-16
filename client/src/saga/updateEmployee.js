@@ -1,15 +1,15 @@
-import { put, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import { updateEmployeeRequest, updateEmployeeSuccess } from "../store/actions";
+import { updateEmployeeApi } from "../api";
 
-import { fetchedData } from "./fetchEmployee";
-
-export function* updateEmployee(payload) {
-    console.log(payload);
-    const id = payload.params.id;
-
+export function* updateEmployee(employee) {
+    // console.log("Update Employee =>", payload);
     yield put(updateEmployeeRequest());
-    const result = fetchedData.filter((item) => item.id === parseInt(id))[0];
-    yield put(updateEmployeeSuccess(result));
+
+    const { data } = yield call(updateEmployeeApi, employee.payload);
+    // console.log(data);
+
+    yield put(updateEmployeeSuccess(data));
 }
 
 export function* editEmployee(payload) {
@@ -19,5 +19,4 @@ export function* editEmployee(payload) {
 
 export default function* watchUpdateEmployee() {
     yield takeLatest("UPDATE_EMPLOYEE_REQUEST_SAGA", updateEmployee);
-    yield takeLatest("UPDATE_EMPLOYEE_SAGA", editEmployee);
 }

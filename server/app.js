@@ -1,43 +1,126 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const app = express();
-const port = 3000;
 
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+const port = 3000;
+let fetchedData = [
+    {
+        id: 1,
+        employeeName: "Java The man",
+        dateOfBirth: "1919/23/2",
+        gender: "Male",
+        salary: "50,000",
+    },
+    {
+        id: 2,
+        employeeName: "Alemlate",
+        dateOfBirth: "1919/23/2",
+        gender: "Male",
+        salary: "50,000",
+    },
+    {
+        id: 3,
+        employeeName: "Jemal",
+        dateOfBirth: "1919/23/2",
+        gender: "Male",
+        salary: "50,000",
+    },
+    {
+        id: 4,
+        employeeName: "Temesgen",
+        dateOfBirth: "1919/23/2",
+        gender: "Male",
+        salary: "50,000",
+    },
+    {
+        id: 5,
+        employeeName: "Fifty",
+        dateOfBirth: "1919/23/2",
+        gender: "Male",
+        salary: "50,000",
+    },
+
+    {
+        id: 6,
+        employeeName: "Tedi",
+        dateOfBirth: "1919/23/2",
+        gender: "Male",
+        salary: "50,000",
+    },
+    {
+        id: 7,
+        employeeName: "Mere",
+        dateOfBirth: "1919/23/2",
+        gender: "Male",
+        salary: "50,000",
+    },
+];
 // the app is small scale so we dont need a router folder
 app.get("/", (req, res) => {
-  res.send({
-    id: 1,
-    name: "Natnael Sisay",
-    salary: "5000",
-    dateOfBirth: Date.now,
-    Gender: "Male",
-  });
+    console.log("Fetch Data called ");
+    res.send({ success: true, data: fetchedData });
+});
+
+app.get("/:id", (req, res) => {
+    const { id } = req.params;
+    const result = fetchedData.filter(
+        (employee) => employee.id === parseInt(id)
+    )[0];
+    if (result) {
+        res.send({ success: true, data: result });
+    }
+    res.send({ success: false, error: "No Employee With that id" });
 });
 
 app.post("/", (req, res) => {
-  res.send({
-    id: 2,
-    name: "Java The Glorious",
-    salary: "5000",
-    dateOfBirth: Date.now,
-    Gender: "Male",
-  });
+    // console.log(req);
+    const employee = req.body;
+    employee.id = Math.round(Math.random() * 1000);
+
+    // console.log("Data with Id => ", employee);
+    // const theEmployee = JSON.parse(Object.keys(employee)[0]);
+    // // console.log("Request from Browser => ", theEmployee);
+    fetchedData.push(employee);
+    res.send({ success: true, body: req.body });
 });
 
 app.delete("/:id", (req, res) => {
-  res.send({
-    message: "Deletion was successfull",
-  });
+    const { id } = req.params;
+    fetchedData = fetchedData.filter(
+        (employee) => employee.id !== parseInt(id)
+    );
+    res.send({
+        success: true,
+        data: id,
+    });
 });
 
 app.patch("/:id", (req, res) => {
-  res.send({
-    message: "Update was successfull",
-  });
+    // console.log(req);
+    const employee = req.body;
+    for (let i = 0; i < fetchedData.length; i++) {
+        if (fetchedData[i].id === parseInt(employee.id)) {
+            fetchedData[i] = employee;
+            res.send({
+                success: true,
+                data: employee,
+            });
+            return;
+        }
+    }
+    res.send({
+        success: false,
+        error: "No Employee with the id",
+    });
 });
 
 app.get("*", (req, res) => {
-  res.send("404 page not found");
+    res.send({ success: false, error: "page not found" });
 });
 app.listen(port, () => {
-  console.log(`Java app listening at http://localhost:${port}`);
+    console.log(`Java app listening at http://localhost:${port}`);
 });

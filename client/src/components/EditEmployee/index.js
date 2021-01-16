@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { fetchOneEmployeeApi } from "../../api";
 
 import "./index.css";
 import Form from "../UI/EmployeeForm";
@@ -10,11 +11,13 @@ class EditEmployee extends React.Component {
         super(props);
         this.state = {
             success: false,
-            id: 0,
-            employeeName: "",
-            dateOfBirth: "",
-            gender: "",
-            salary: "",
+            data: {
+                id: 0,
+                employeeName: "",
+                dateOfBirth: "",
+                gender: "",
+                salary: "",
+            },
         };
 
         this.submit = this.submit.bind(this);
@@ -22,26 +25,28 @@ class EditEmployee extends React.Component {
     }
     componentDidMount() {
         const { params } = this.props.match;
-        this.props.dispatch({ type: "UPDATE_EMPLOYEE_REQUEST_SAGA", params });
-        this.setState((prev) => {
-            return this.props.employee;
-        });
+        const { id } = params;
+        fetchOneEmployeeApi(id).then((res) =>
+            this.setState({ data: res.data.data })
+        );
     }
 
     submit(e) {
         e.preventDefault();
-        console.log(this.state);
-        this.props.dispatch({ type: "UPDATE_EMPLOYEE_SAGA" });
+        this.props.dispatch({
+            type: "UPDATE_EMPLOYEE_REQUEST_SAGA",
+            payload: this.state.data,
+        });
         this.setState({ success: true });
     }
 
     handleChange(e) {
         const { name, value } = e.target;
-        this.setState({ [name]: value });
+        this.setState({ data: { ...this.state.data, [name]: value } });
     }
 
     render() {
-        const { employeeName, gender, salary, dateOfBirth } = this.state;
+        const { employeeName, gender, salary, dateOfBirth } = this.state.data;
         return (
             <div>
                 {this.state.success && <Redirect to="/" />}
@@ -58,9 +63,4 @@ class EditEmployee extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    const { employee } = state.updateEmployee;
-    return { employee };
-};
-
-export default connect(mapStateToProps, null)(EditEmployee);
+export default connect()(EditEmployee);

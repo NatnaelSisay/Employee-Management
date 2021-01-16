@@ -1,6 +1,6 @@
-import { put, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import { fetchEmployeeReqest, fetchEmployeeSuccess } from "../store/actions";
-
+import { fetchEmplyeeApi } from "../api";
 import { FETCH_EMPLOYEE_REQUEST_SAGA } from "../store/types";
 
 export let fetchedData = [
@@ -57,9 +57,12 @@ export let fetchedData = [
 ];
 
 // Worker
+// I DONT KNOW IF THIS IS THE RIGHT WAY TO DO IT OR NOR ?
 export function* fetchEmployee() {
     yield put(fetchEmployeeReqest());
-    yield put(fetchEmployeeSuccess(fetchedData));
+    const { data } = yield call(fetchEmplyeeApi);
+    // console.log("Result => ", data);
+    yield put(fetchEmployeeSuccess(data.data));
 }
 
 // Watcher

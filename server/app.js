@@ -99,15 +99,14 @@ app.delete("/:id", (req, res) => {
 });
 
 app.patch("/:id", (req, res) => {
-    const { id } = req.params;
+    // console.log(req);
     const employee = req.body;
     for (let i = 0; i < fetchedData.length; i++) {
-        if (fetchedData[i].id === parseInt(id)) {
+        if (fetchedData[i].id === employee.id) {
             fetchedData[i] = employee;
-            fetchedData[i].id = parseInt(id);
             res.send({
                 success: true,
-                data: id,
+                data: employee,
             });
         }
     }

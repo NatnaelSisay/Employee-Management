@@ -26,14 +26,9 @@ class EditEmployee extends React.Component {
     componentDidMount() {
         const { params } = this.props.match;
         const { id } = params;
-        fetchOneEmployeeApi(id)
-            .then((res) => {
-                // console.log("Response from server =>", res.data.data);
-                this.setState({ data: res.data.data });
-            })
-            .catch((error) =>
-                console.log("Edit Employee Fetch [ ERROR ]", error)
-            );
+        fetchOneEmployeeApi(id).then((res) =>
+            this.setState({ data: res.data.data })
+        );
     }
 
     submit(e) {
@@ -68,9 +63,4 @@ class EditEmployee extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    const { employee } = state.updateEmployee;
-    return { employee };
-};
-
-export default connect(mapStateToProps, null)(EditEmployee);
+export default connect()(EditEmployee);

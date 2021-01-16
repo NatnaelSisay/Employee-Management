@@ -13,8 +13,8 @@ const updateEmployeeApi = (employee) => {
     return axios.patch(`${BASE_URL}/${employee.id}`, employee);
 };
 
-const deleteEmployee = () => {
-    return axios.delete(BASE_URL);
+const deleteEmployeeApi = (id) => {
+    return axios.delete(`${BASE_URL}/${id}`);
 };
 
 const createEmployee = (employee) => {
@@ -25,6 +25,6 @@ export {
     fetchEmplyeeApi,
     fetchOneEmployeeApi,
     updateEmployeeApi,
-    deleteEmployee,
+    deleteEmployeeApi,
     createEmployee,
 };

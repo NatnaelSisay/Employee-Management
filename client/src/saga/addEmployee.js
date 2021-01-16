@@ -2,7 +2,6 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { addEmployeeRequest, addEmployeeSuccess } from "../store/actions";
 import { createEmployee } from "../api";
 
-import { fetchedData } from "./fetchEmployee";
 export function* addEmployee(result) {
     const { payload } = result;
     console.log("User Data => ", payload);

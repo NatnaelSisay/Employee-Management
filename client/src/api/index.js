@@ -17,8 +17,8 @@ const deleteEmployee = () => {
     return axios.delete(BASE_URL);
 };
 
-const createEmployee = (data) => {
-    return axios.post(BASE_URL, data);
+const createEmployee = (employee) => {
+    return axios.post(BASE_URL, employee);
 };
 
 export {

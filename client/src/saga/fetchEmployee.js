@@ -62,7 +62,7 @@ export function* fetchEmployee() {
     yield put(fetchEmployeeReqest());
     const { data } = yield call(fetchEmplyeeApi);
     // console.log("Result => ", data);
-    yield put(fetchEmployeeSuccess(data));
+    yield put(fetchEmployeeSuccess(data.data));
 }
 
 // Watcher

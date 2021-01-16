@@ -25,7 +25,7 @@ class EditEmployee extends React.Component {
         const { params } = this.props.match;
         const { id } = params;
         fetchOneEmployeeApi(id)
-            .then(({ data }) => this.setState(data[id - 1]))
+            .then(({ data }) => this.setState(data.data[id - 1]))
             .catch((error) =>
                 console.log("Edit Employee Fetch [ ERROR ]", error)
             );

@@ -1,8 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 const port = 3000;
 let fetchedData = [
     {
@@ -75,11 +78,15 @@ app.get("/:id", (req, res) => {
 });
 
 app.post("/", (req, res) => {
+    console.log(req);
     const employee = req.body;
-    employee.id = Math.random() * 1000;
+    employee.id = Math.random() * 100;
+
+    console.log("Data with Id => ", employee);
+    // const theEmployee = JSON.parse(Object.keys(employee)[0]);
+    // // console.log("Request from Browser => ", theEmployee);
     fetchedData.push(employee);
-    // res.send({ success: true });
-    res.send({ success: true, data: employee });
+    res.send({ success: true, body: req.body });
 });
 
 app.delete("/:id", (req, res) => {
